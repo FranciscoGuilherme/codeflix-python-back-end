@@ -14,6 +14,8 @@ USER python
 
 WORKDIR /home/python/app
 
+ENV PYTHONPATH=${PYTHONPATH}/home/python/app/src
+
 # ===============================
 # -----[Keep application up]-----
 # ===============================
