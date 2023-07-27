@@ -1,6 +1,8 @@
 {
     "conventionalCommits.scopes": [
         "build",
-        "config"
+        "config",
+        "domain",
+        "project"
     ]
 }
