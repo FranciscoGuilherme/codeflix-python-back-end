@@ -1,0 +1,17 @@
+{
+	"name": "Micro Videos Python",
+	"dockerComposeFile": [
+		"../docker-compose.yaml",
+		"docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/home/python/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python"
+			]
+		}
+	},
+	"remoteUser": "python"
+}
