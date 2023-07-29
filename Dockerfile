@@ -16,7 +16,7 @@ RUN useradd -ms /bin/bash python
 
 USER python
 
-COPY ./config/.p10k.zsh /home/python/.p10k.zsh
+COPY ./docker/zsh/powerlevel10k/.p10k.zsh /home/python/.p10k.zsh
 
 # ====================================
 # -----[Container specifications]-----
@@ -40,6 +40,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -a 'export TERM=xterm-256color'
 
 RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
+RUN echo 'HISTFILE=/home/python/zsh/.zsh_history' >> ~/.zshrc
 
 # ===============================
 # -----[Keep application up]-----
