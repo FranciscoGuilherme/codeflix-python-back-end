@@ -12,6 +12,9 @@
 				"ms-python.python",
 				"sonarsource.sonarlint-vscode"
 			]
+		},
+		"settings": {
+			"terminal.integrated.defaultProfile.linux": "zsh"
 		}
 	},
 	"remoteUser": "python"
