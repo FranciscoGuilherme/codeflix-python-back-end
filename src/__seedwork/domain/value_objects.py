@@ -2,6 +2,7 @@ import uuid
 from dataclasses import dataclass, field
 from __seedwork.domain.exceptions import InvalidUuidException
 
+
 @dataclass
 class UniqueEntityId:
 
