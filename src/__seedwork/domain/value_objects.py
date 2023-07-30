@@ -1,6 +1,6 @@
 import uuid
 from dataclasses import dataclass, field
-from __seedwork.exceptions import InvalidUuidException
+from __seedwork.domain.exceptions import InvalidUuidException
 
 @dataclass
 class UniqueEntityId:
