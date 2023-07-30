@@ -70,12 +70,12 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
             self.assertEqual(assert_error.exception.args[0], "ID must be a valid UUID")
 
     def test_accept_uuid_passed_in_constructor(self) -> None:
-        with (patch.object(
+        with patch.object(
             UniqueEntityId,
             "_UniqueEntityId__validate",
             autospec=True,
             side_effect=UniqueEntityId._UniqueEntityId__validate
-        ) as mock_validate):
+        ) as mock_validate:
             value_object = UniqueEntityId("e3201cad-6d42-4aa0-b0bf-603280c10d15")
             mock_validate.assert_called_once()
             self.assertEqual(value_object.id, "e3201cad-6d42-4aa0-b0bf-603280c10d15")
@@ -85,12 +85,12 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
         self.assertEqual(value_object.id, str(uuid_value))
 
     def test_generate_id_when_no_passed_id_in_constructor(self) -> None:
-        with (patch.object(
+        with patch.object(
             UniqueEntityId,
             "_UniqueEntityId__validate",
             autospec=True,
             side_effect=UniqueEntityId._UniqueEntityId__validate
-        ) as mock_validate):
+        ) as mock_validate:
             value_object = UniqueEntityId()
             mock_validate.assert_called_once()
             self.assertIsNotNone(value_object.id)
