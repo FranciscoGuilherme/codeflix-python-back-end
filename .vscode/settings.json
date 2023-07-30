@@ -3,7 +3,9 @@
         "build",
         "config",
         "domain",
-        "project"
+        "project",
+        "seedwork",
+        "value_objects"
     ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#65c89b",
