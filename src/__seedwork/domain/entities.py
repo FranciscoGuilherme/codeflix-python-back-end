@@ -12,7 +12,7 @@ class Entity(ABC):
 
     @property
     def id(self) -> str:
-        return str(self.unique_entity_id)
+        return str(self.unique_entity_id.id)
 
     def to_dict(self) -> dict:
         entity_dict = asdict(self)
