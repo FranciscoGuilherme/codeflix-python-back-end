@@ -3,6 +3,7 @@ from datetime import datetime
 from dataclasses import is_dataclass, FrozenInstanceError
 from category.domain.entities import Category
 
+
 class TestCategory(unittest.TestCase):
 
     def test_if_is_a_dataclass(self):
