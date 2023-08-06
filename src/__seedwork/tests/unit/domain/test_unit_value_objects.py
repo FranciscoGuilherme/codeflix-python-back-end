@@ -52,6 +52,7 @@ class TestValueObjectUnit(unittest.TestCase):
             value_object = StubOneProp(prop="custom value")
             value_object.prop = "custom modified"
 
+
 class TestUniqueEntityIdUnit(unittest.TestCase):
 
     def test_if_is_a_dataclass(self) -> None:
