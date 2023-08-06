@@ -5,7 +5,8 @@
         "domain",
         "project",
         "seedwork",
-        "value_objects"
+        "value_objects",
+        "entities"
     ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#65c89b",
