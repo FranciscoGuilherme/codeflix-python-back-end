@@ -3,6 +3,7 @@ from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
 
+
 @dataclass(kw_only=True, frozen=True)
 class Category:
 
