@@ -9,9 +9,6 @@ from __seedwork.domain.value_objects import UniqueEntityId
 @dataclass(kw_only=True, frozen=True)
 class Category(Entity):
 
-    id: UniqueEntityId = field(
-        default_factory=lambda: UniqueEntityId()
-    )
     name: str
     description: Optional[str] = None
     is_active: Optional[bool] = True
