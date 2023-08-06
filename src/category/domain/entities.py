@@ -2,13 +2,15 @@ import uuid
 from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
+from __seedwork.domain.entities import Entity
+from __seedwork.domain.value_objects import UniqueEntityId
 
 
 @dataclass(kw_only=True, frozen=True)
-class Category:
+class Category(Entity):
 
-    id: uuid.UUID = field(
-        default_factory=lambda: uuid.uuid4()
+    id: UniqueEntityId = field(
+        default_factory=lambda: UniqueEntityId()
     )
     name: str
     description: Optional[str] = None
