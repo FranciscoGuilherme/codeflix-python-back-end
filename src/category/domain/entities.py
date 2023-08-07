@@ -1,9 +1,7 @@
-import uuid
 from typing import Optional
 from datetime import datetime
 from dataclasses import dataclass, field
 from __seedwork.domain.entities import Entity
-from __seedwork.domain.value_objects import UniqueEntityId
 
 
 @dataclass(kw_only=True, frozen=True)
