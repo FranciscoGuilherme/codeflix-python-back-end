@@ -43,6 +43,7 @@ WORKDIR $USER_HOME/app
 
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PYTHONPATH=${PYTHONPATH}$USER_HOME/app/src
+ENV MY_PYTHON_VENV=$USER_HOME/app/.venv
 ENV MY_PYTHON_PACKAGES=$USER_HOME/app/__pypackages__/3.10
 
 # =================================
