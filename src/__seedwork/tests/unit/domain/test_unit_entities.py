@@ -1,6 +1,7 @@
 import uuid
 import unittest
 from abc import ABC
+from unittest.mock import patch
 from dataclasses import is_dataclass, dataclass
 from __seedwork.domain.entities import Entity
 from __seedwork.domain.value_objects import UniqueEntityId
@@ -48,3 +49,18 @@ class TestEntityUnit(unittest.TestCase):
             "prop1": "value 1",
             "prop2": "value 2"
         })
+
+    def test_set_method(self) -> None:
+        with patch.object(
+            StubEntity,
+            "_set",
+            autospec=True,
+            side_effect=StubEntity._set
+        ) as stub_entity_mock:
+            entity = StubEntity(
+                prop1="initial value 1",
+                prop2="initial value 2"
+            )
+            entity._set("prop1", "new value")
+            self.assertEqual(entity.prop1, "new value")
+            stub_entity_mock.assert_called_once()
