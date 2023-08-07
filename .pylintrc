@@ -1,0 +1,3 @@
+[MASTER]
+ignore=__pypackages__/**/*.py
+disable=C0103,C0111,W0108
