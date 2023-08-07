@@ -75,6 +75,8 @@ RUN echo "source $USER_HOME/custom/plugins/zsh-completions/zsh-completions.plugi
 # ==============================
 
 RUN echo "HISTFILE=/home/node/zsh/.zsh_history" >> $USER_HOME/.zshrc && \
+    echo 'export PATH=$PATH:${MY_PYTHON_VENV}/bin' >> $USER_HOME/.zshrc && \
+    echo 'export PATH=$PATH:${MY_PYTHON_PACKAGES}/bin' >> $USER_HOME/.zshrc && \
     echo 'eval "$(pdm --pep582)"' >> $USER_HOME/.bashrc && \
     echo 'eval "$(pdm --pep582)"' >> $USER_HOME/.zshrc
 
