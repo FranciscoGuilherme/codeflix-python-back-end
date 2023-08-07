@@ -32,5 +32,11 @@
         "editor.tabSize": 4,
         "editor.insertSpaces": true,
         "editor.defaultFormatter": "ms-python.autopep8"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/__pypackages__/3.10/lib"
+    ],
+    "python.autoComplete.extraPaths": [
+        "${workspaceFolder}/__pypackages__/3.10/lib"
+    ]
 }
