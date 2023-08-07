@@ -1,23 +1,18 @@
 [project]
-name = ""
-version = ""
+name = "clean-arch-ddd-python"
+version = "1.0.0"
 description = ""
 authors = [
-    {name = "Francisco Guilherme", email = "franciscoguilherme.mundo@outlook.com"},
+    { name = "Francisco Guilherme", email = "franciscoguilherme.mundo@outlook.com" },
 ]
-dependencies = [
-]
+dependencies = []
 requires-python = ">=3.10.2"
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
-[project.urls]
-Homepage = ""
 [build-system]
 requires = ["pdm-pep517>=0.12.0"]
 build-backend = "pdm.pep517.api"
 
 [tool.pdm.dev-dependencies]
-dev = [
-    "autopep8>=2.0.2",
-]
+dev = ["autopep8>=2.0.2", "pylint>=2.17.5"]
