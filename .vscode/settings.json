@@ -30,6 +30,7 @@
     "peacock.remoteColor": "#42b883",
     "[python]": {
         "editor.tabSize": 4,
-        "editor.insertSpaces": true
+        "editor.insertSpaces": true,
+        "editor.defaultFormatter": "ms-python.autopep8"
     }
 }
