@@ -6,7 +6,8 @@
     "project",
     "seedwork",
     "value_objects",
-    "entities"
+    "entities",
+    "validators"
   ],
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#65c89b",
