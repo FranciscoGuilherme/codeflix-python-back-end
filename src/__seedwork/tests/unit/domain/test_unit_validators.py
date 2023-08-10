@@ -46,3 +46,112 @@ class TestValidatorRules(unittest.TestCase):
             for i in valid_data:
                 ValidatorRules.values(i["value"], "prop").required()
             self.assertEqual(validator_mock.call_count, len(valid_data))
+
+    def test_should_throw_an_error_when_try_to_validate_string(self) -> None:
+        invalid_data = [
+            {"value": 0},
+            {"value": 5},
+            {"value": 5.1},
+            {"value": True},
+            {"value": []},
+            {"value": {}}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="string",
+            autospec=True,
+            side_effect=ValidatorRules.string
+        ) as validator_mock:
+            for i in invalid_data:
+                with self.assertRaises(ValidationException, msg=f"Value {i['value']} dit not raise") as assert_error:
+                    ValidatorRules.values(i["value"], "prop").string()
+                self.assertEqual("The prop must be a string", assert_error.exception.args[0])
+            self.assertEqual(validator_mock.call_count, len(invalid_data))
+
+    def test_string_rule_valid_data(self) -> None:
+        valid_data = [
+            {"value": ""},
+            {"value": None},
+            {"value": "None"},
+            {"value": "True"}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="string",
+            autospec=True,
+            side_effect=ValidatorRules.string
+        ) as validator_mock:
+            for i in valid_data:
+                ValidatorRules.values(i["value"], "prop").string()
+            self.assertEqual(validator_mock.call_count, len(valid_data))
+
+    def test_should_throw_an_error_when_try_to_validate_max_length(self) -> None:
+        invalid_data = [
+            {"value": "t" * 5}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="max_length",
+            autospec=True,
+            side_effect=ValidatorRules.max_length
+        ) as validator_mock:
+            for i in invalid_data:
+                with self.assertRaises(ValidationException, msg=f"Value {i['value']} dit not raise") as assert_error:
+                    ValidatorRules.values(i["value"], "prop").max_length(4)
+                self.assertEqual("The prop must be less than 4 characters", assert_error.exception.args[0])
+            self.assertEqual(validator_mock.call_count, len(invalid_data))
+
+    def test_max_length_rule_valid_data(self) -> None:
+        valid_data = [
+            {"value": "t"},
+            {"value": None},
+            {"value": "None"},
+            {"value": "True"}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="max_length",
+            autospec=True,
+            side_effect=ValidatorRules.max_length
+        ) as validator_mock:
+            for i in valid_data:
+                ValidatorRules.values(i["value"], "prop").max_length(5)
+            self.assertEqual(validator_mock.call_count, len(valid_data))
+
+    def test_should_throw_an_error_when_try_to_validate_boolean(self) -> None:
+        invalid_data = [
+            {"value": 0},
+            {"value": 5},
+            {"value": 5.1},
+            {"value": []},
+            {"value": {}},
+            {"value": "True"},
+            {"value": "False"}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="boolean",
+            autospec=True,
+            side_effect=ValidatorRules.boolean
+        ) as validator_mock:
+            for i in invalid_data:
+                with self.assertRaises(ValidationException, msg=f"Value {i['value']} dit not raise") as assert_error:
+                    ValidatorRules.values(i["value"], "prop").boolean()
+                self.assertEqual("The prop must be a boolean", assert_error.exception.args[0])
+            self.assertEqual(validator_mock.call_count, len(invalid_data))
+
+    def test_boolean_rule_valid_data(self) -> None:
+        valid_data = [
+            {"value": None},
+            {"value": True},
+            {"value": False}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="boolean",
+            autospec=True,
+            side_effect=ValidatorRules.boolean
+        ) as validator_mock:
+            for i in valid_data:
+                ValidatorRules.values(i["value"], "prop").boolean()
+            self.assertEqual(validator_mock.call_count, len(valid_data))
