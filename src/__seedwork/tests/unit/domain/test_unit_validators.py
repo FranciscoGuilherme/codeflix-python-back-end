@@ -155,3 +155,31 @@ class TestValidatorRules(unittest.TestCase):
             for i in valid_data:
                 ValidatorRules.values(i["value"], "prop").boolean()
             self.assertEqual(validator_mock.call_count, len(valid_data))
+
+    def test_should_throw_a_validation_exception_when_combine_two_or_more_rules(self) -> None:
+        length: int = 2
+        invalid_data = [
+            {"value": None, "message": "The prop is required"},
+            {"value": 1000, "message": "The prop must be a string"},
+            {"value": "1000", "message": f"The prop must be less than {length} characters"}
+        ]
+        for i in invalid_data:
+            with self.assertRaises(ValidationException) as assert_error:
+                ValidatorRules.values(i["value"], "prop").required().string().max_length(length)
+            self.assertEqual(i["message"], assert_error.exception.args[0])
+
+    def test_valid_rules_combination(self) -> None:
+        valid_data = [
+            {"value": "value 1"},
+            {"value": "value two"},
+            {"value": "something else"}
+        ]
+        with patch.object(
+            target=ValidatorRules,
+            attribute="string",
+            autospec=True,
+            side_effect=ValidatorRules.string
+        ) as validator_mock:
+            for i in valid_data:
+                ValidatorRules.values(i["value"], "prop").required().string().max_length(50)
+        self.assertEqual(validator_mock.call_count, len(valid_data))
