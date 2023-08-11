@@ -1,5 +1,6 @@
+import abc
 from abc import ABC
-from typing import Any
+from typing import Any, List, Dict, TypeVar, Generic
 from dataclasses import dataclass
 from __seedwork.domain.exceptions import ValidationException
 
@@ -33,3 +34,18 @@ class ValidatorRules(ABC):
         if self.value is not None and not isinstance(self.value, bool):
             raise ValidationException(f"The {self.prop} must be a boolean")
         return self
+
+
+ErrorFields = Dict[str, List[str]]
+PropsValidated = TypeVar('PropsValidated')
+
+
+@dataclass(slots=True)
+class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
+
+    errors: ErrorFields
+    validated_data: PropsValidated
+
+    @abc.abstractmethod
+    def validate(self, data: Any) -> bool:
+        raise NotImplementedError()
