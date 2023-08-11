@@ -68,7 +68,7 @@ RUN git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${USER_
 RUN echo "source $USER_HOME/custom/plugins/zsh-completions/zsh-completions.plugin.zsh" >> $USER_HOME/.zshrc && \
     echo "source $USER_HOME/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh" >> $USER_HOME/.zshrc && \
     echo "source $USER_HOME/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" >> $USER_HOME/.zshrc && \
-    echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> $USER_HOME/.zshrc \
+    echo "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh" >> $USER_HOME/.zshrc
 
 # ==============================
 # -----[Other informations]-----
