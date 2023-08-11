@@ -1,6 +1,7 @@
 import unittest
+from dataclasses import fields
 from unittest.mock import patch
-from __seedwork.domain.validators import ValidatorRules
+from __seedwork.domain.validators import ValidatorRules, ValidatorFieldsInterface
 from __seedwork.domain.exceptions import ValidationException
 
 
@@ -183,3 +184,24 @@ class TestValidatorRules(unittest.TestCase):
             for i in valid_data:
                 ValidatorRules.values(i["value"], "prop").required().string().max_length(50)
         self.assertEqual(validator_mock.call_count, len(valid_data))
+
+
+class TestValidatorFieldsInterface(unittest.TestCase):
+
+    def test_should_throw_an_exception_when_try_create_an_instance_method_not_implemented(self) -> None:
+        with self.assertRaises(TypeError) as assert_error:
+            # pylint: disable=abstract-class-instantiated
+            ValidatorFieldsInterface()
+        self.assertEqual(
+            "Can't instantiate abstract class ValidatorFieldsInterface with abstract method validate",
+            assert_error.exception.args[0]
+        )
+
+    def test_interface_fields(self) -> None:
+        fields_class = fields(ValidatorFieldsInterface)
+        errors_field = fields_class[0]
+        validated_data_field = fields_class[1]
+        self.assertEqual(errors_field.name, "errors")
+        self.assertIsNone(errors_field.default)
+        self.assertEqual(validated_data_field.name, "validated_data")
+        self.assertIsNone(validated_data_field.default)
