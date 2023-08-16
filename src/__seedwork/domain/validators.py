@@ -1,9 +1,14 @@
 import abc
 from abc import ABC
 from typing import Any, List, Dict, TypeVar, Generic
+from django.conf import settings
 from dataclasses import dataclass
 from rest_framework.serializers import Serializer
 from __seedwork.domain.exceptions import ValidationException
+
+
+if not settings.configured:
+    settings.configure(USE_I18N=False)
 
 
 @dataclass(frozen=True, slots=True)
