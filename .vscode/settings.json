@@ -43,8 +43,7 @@
     "${workspaceFolder}/__pypackages__/3.10/lib"
   ],
   "python.testing.pytestArgs": [
-    "src",
-    "-s"
+    "src"
   ],
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true
