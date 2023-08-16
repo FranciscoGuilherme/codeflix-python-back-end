@@ -3,6 +3,7 @@ from abc import ABC
 from typing import Any, List, Dict, TypeVar, Generic
 from django.conf import settings
 from dataclasses import dataclass
+from rest_framework.fields import CharField, BooleanField
 from rest_framework.serializers import Serializer
 from __seedwork.domain.exceptions import ValidationException
 
@@ -72,3 +73,28 @@ class DRFValidator(Generic[PropsValidated], ValidatorFieldsInterface[PropsValida
 
         self.validated_data = serializer.validated_data
         return True
+
+
+class StrictCharField(CharField):
+
+    def to_internal_value(self, data):
+        if not isinstance(data, str):
+            self.fail("invalid")
+
+        return super().to_internal_value(data)
+
+
+class StrictBoolField(BooleanField):
+
+    def to_internal_value(self, data):
+        try:
+            if data is True:
+                return True
+            if data is False:
+                return False
+            elif data is None and self.allow_null:
+                return None
+        except TypeError:
+            pass
+
+        self.fail("invalid", input=data)
