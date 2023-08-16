@@ -52,7 +52,7 @@ class ValidatorFieldsInterface(ABC, Generic[PropsValidated]):
         raise NotImplementedError()
 
 
-class DRFValidator(Generic[PropsValidated], ValidatorFieldsInterface[PropsValidated]):
+class DRFValidator(Generic[PropsValidated], ValidatorFieldsInterface[PropsValidated], ABC):
 
     def validate(self, data: Serializer):
         serializer = data
@@ -60,7 +60,7 @@ class DRFValidator(Generic[PropsValidated], ValidatorFieldsInterface[PropsValida
 
         if not is_valid:
             self.errors = {
-                field: [str(error) for _error in _errors]
+                field: [str(_error) for _error in _errors]
                     for field, _errors in serializer.errors.items()
             }
             return False
