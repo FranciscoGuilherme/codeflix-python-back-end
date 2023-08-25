@@ -1,6 +1,6 @@
 import unittest
 from rest_framework import serializers
-from __seedwork.domain.validators import DRFValidator
+from __seedwork.domain.validators import DRFValidator, StrictCharField, StrictBoolField
 
 
 class StubSerializer(serializers.Serializer):
@@ -30,4 +30,49 @@ class TestDRFValidatorIntegration(unittest.TestCase):
             {
                 "name": "value",
                 "price": 5
+            })
+
+
+class TestStrictCharFieldUnit(unittest.TestCase):
+
+    def test_if_is_invalid_when_not_str_values(self) -> None:
+        class StubStrictCharFieldSerializer(serializers.Serializer):
+            name = StrictCharField()
+
+        invalid_data: list = [
+            {"name": 5},
+            {"name": True}
+        ]
+
+        for i in invalid_data:
+            serializer = StubStrictCharFieldSerializer(data=i)
+            serializer.is_valid()
+            self.assertEqual(serializer.errors, {
+                "name": [serializers.ErrorDetail(string="Not a valid string.", code="invalid")]
+            })
+
+    def test_none_value_is_valid(self) -> None:
+        class StubStrictCharFieldSerializer(serializers.Serializer):
+            name = StrictCharField(required=False, allow_null=True)
+
+        serializer = StubStrictCharFieldSerializer(data={"name": None})
+        self.assertTrue(serializer.is_valid())
+
+    def test_if_is_invalid_when_not_boolean_values(self) -> None:
+        class StubStrictBooleanFieldSerializer(serializers.Serializer):
+            name = StrictBoolField()
+
+        invalid_data: list = [
+            {"name": 0},
+            {"name": 1},
+            {"name": ""},
+            {"name": "True"},
+            {"name": "False"}
+        ]
+
+        for i in invalid_data:
+            serializer = StubStrictBooleanFieldSerializer(data=i)
+            serializer.is_valid()
+            self.assertEqual(serializer.errors, {
+                "name": [serializers.ErrorDetail(string="Must be a valid boolean.", code="invalid")]
             })
